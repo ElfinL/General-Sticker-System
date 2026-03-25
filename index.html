@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DKIP 簽章註冊中心 - GitHub 版</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      min-height: 100vh;
+      color: #fff;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    header {
+      text-align: center;
+      padding: 40px 0;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .subtitle {
+      color: #888;
+      font-size: 1.1rem;
+    }
+    
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .input-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+    
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      color: #fff;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    
+    input[type="text"]:focus, input[type="password"]:focus {
+      outline: none;
+      border-color: #00d4ff;
+    }
+    
+    .btn {
+      padding: 14px 28px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+      color: #fff;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+    }
+    
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+    
+    .preview-section {
+      margin-top: 30px;
+      text-align: center;
+    }
+    
+    .preview-image {
+      max-width: 300px;
+      max-height: 200px;
+      border-radius: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      margin: 20px auto;
+      display: none;
+    }
+    
+    .preview-image.show {
+      display: block;
+    }
+    
+    .result-section {
+      margin-top: 30px;
+      padding: 25px;
+      background: rgba(0, 212, 255, 0.1);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      display: none;
+    }
+    
+    .result-section.show {
+      display: block;
+    }
+    
+    .signature-display {
+      font-family: monospace;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      word-break: break-all;
+      color: #00ff88;
+      font-size: 0.9rem;
+      position: relative;
+    }
+    
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      cursor: pointer;
+    }
+    
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .error {
+      color: #ff6b6b;
+      margin-top: 10px;
+      padding: 12px;
+      background: rgba(255, 107, 107, 0.1);
+      border-radius: 8px;
+      display: none;
+    }
+    
+    .error.show {
+      display: block;
+    }
+    
+    .success {
+      color: #00ff88;
+      margin-top: 10px;
+      padding: 12px;
+      background: rgba(0, 255, 136, 0.1);
+      border-radius: 8px;
+      display: none;
+    }
+    
+    .success.show {
+      display: block;
+    }
+    
+    .signature-list {
+      margin-top: 20px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    
+    .sig-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .sig-item img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    
+    .sig-info {
+      flex: 1;
+    }
+    
+    .sig-code {
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: #888;
+      word-break: break-all;
+    }
+    
+    .hidden-sig {
+      color: #00ff88;
+    }
+    
+    .hidden-sig::before {
+      content: "👁️ 零寬簽章: ";
+      opacity: 0.7;
+    }
+    
+    .setup-section {
+      background: rgba(255, 193, 7, 0.1);
+      border: 1px solid rgba(255, 193, 7, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .setup-section h3 {
+      color: #ffc107;
+      margin-bottom: 15px;
+    }
+    
+    .setup-section p {
+      color: #ccc;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    
+    .stats {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    
+    .stat-item {
+      text-align: center;
+      padding: 15px 25px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+    }
+    
+    .stat-value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #00d4ff;
+    }
+    
+    .stat-label {
+      color: #888;
+      font-size: 0.85rem;
+      margin-top: 5px;
+    }
+    
+    .export-section {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+    }
+    
+    .export-section textarea {
+      width: 100%;
+      height: 100px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      color: #fff;
+      font-family: monospace;
+      font-size: 0.8rem;
+      padding: 10px;
+      resize: none;
+    }
+    
+    .gist-info {
+      background: rgba(0, 212, 255, 0.05);
+      border-left: 3px solid #00d4ff;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .gist-info code {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #00d4ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔐 DKIP 簽章註冊中心</h1>
+      <p class="subtitle">純前端版本 (GitHub Pages + Gist)</p>
+    </header>
+
+    <div class="setup-section" id="setupSection">
+      <h3>⚙️ 初始設定</h3>
+      <p>此版本使用 <strong>GitHub Gist</strong> 作為免費資料庫，請先建立一個 Gist：</p>
+      <ol style="color: #ccc; margin-left: 20px; line-height: 1.8;">
+        <li>前往 <a href="https://gist.github.com" target="_blank" style="color: #00d4ff;">gist.github.com</a></li>
+        <li>建立一個新的 Gist，檔名填 <code>dkip-signatures.json</code></li>
+        <li>內容先填入 <code>[]</code> (空陣列)</li>
+        <li>點擊 "Create secret gist" (建議用 secret 避免被搜尋)</li>
+        <li>複製 Gist ID (網址中最後那串字符)</li>
+      </ol>
+      <div class="input-group" style="margin-top: 15px;">
+        <label>Gist ID</label>
+        <input type="text" id="gistIdInput" placeholder="例如: a1b2c3d4e5f6...">
+      </div>
+      <div class="input-group">
+        <label>GitHub Token (需要有 gist 權限，<a href="https://github.com/settings/tokens/new?scopes=gist" target="_blank" style="color: #00d4ff;">點此生成</a>)</label>
+        <input type="password" id="githubTokenInput" placeholder="ghp_xxxxxxxxxxxx">
+      </div>
+      <button class="btn btn-primary" onclick="saveGistConfig()">💾 儲存設定</button>
+    </div>
+
+    <div class="card" id="registerSection" style="display: none;">
+      <div class="input-group">
+        <label for="imageUrl">Discord 圖片網址 (cdn.discordapp.com)</label>
+        <input type="text" id="imageUrl" placeholder="https://cdn.discordapp.com/attachments/...">
+      </div>
+      
+      <button class="btn btn-primary" id="previewBtn" onclick="previewImage()">
+        👁️ 預覽圖片
+      </button>
+      <button class="btn btn-secondary" id="registerBtn" onclick="registerSignature()" disabled>
+        ✨ 生成簽章
+      </button>
+      
+      <div class="error" id="errorMsg"></div>
+      <div class="success" id="successMsg"></div>
+      
+      <div class="preview-section">
+        <img id="previewImg" class="preview-image" alt="預覽">
+      </div>
+      
+      <div class="result-section" id="resultSection">
+        <h3>🎉 簽章已生成！</h3>
+        <p>這個零寬字符簽章已與圖片綁定：</p>
+        <div class="signature-display">
+          <span id="signatureCode" class="hidden-sig"></span>
+          <button class="copy-btn" onclick="copySignature()">複製</button>
+        </div>
+        <p style="color: #888; font-size: 0.9rem; margin-top: 15px;">
+          此簽章已自動儲存到 Gist，所有使用者都能同步取得。
+        </p>
+      </div>
+    </div>
+
+    <div class="card" id="listSection" style="display: none;">
+      <h2>📋 已註冊簽章列表</h2>
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-value" id="totalSigs">0</div>
+          <div class="stat-label">已註冊簽章</div>
+        </div>
+      </div>
+      <div class="signature-list" id="sigList">
+        <p style="color: #888; text-align: center;">載入中...</p>
+      </div>
+      <button class="btn btn-secondary" onclick="loadSignatures()" style="margin-top: 15px; width: 100%;">
+        🔄 重新整理
+      </button>
+      
+      <div class="export-section">
+        <label>JSON 匯出 (供插件使用)</label>
+        <textarea id="jsonExport" readonly></textarea>
+        <button class="btn btn-secondary" onclick="copyJsonExport()" style="margin-top: 10px; width: 100%;">
+          📋 複製 JSON
+        </button>
+      </div>
+    </div>
+
+    <div class="gist-info">
+      <strong>💡 給插件使用者的資訊：</strong><br>
+      插件同步網址：<code id="gistRawUrl">請先完成設定</code><br>
+      <small style="color: #888;">將此網址貼到 DKIP 插件的「遠端 JSON 網址」欄位即可同步簽章</small>
+    </div>
+  </div>
+
+  <script>
+    // 零寬字符集
+    const ZERO_WIDTH_CHARS = ['\u200B', '\u200C', '\u200D', '\uFEFF'];
+    const SIG_PREFIX = '\u200B\u200C';
+    
+    let currentSignature = '';
+    let currentImageUrl = '';
+    let gistId = '';
+    let githubToken = '';
+    let signatures = [];
+    
+    // 從 localStorage 載入設定
+    function loadConfig() {
+      gistId = localStorage.getItem('dkip_gist_id') || '';
+      githubToken = localStorage.getItem('dkip_github_token') || '';
+      
+      if (gistId) {
+        document.getElementById('gistIdInput').value = gistId;
+        document.getElementById('gistRawUrl').textContent = `https://gist.githubusercontent.com/[你的GitHub名稱]/${gistId}/raw/dkip-signatures.json`;
+        showRegisterSection();
+        loadSignatures();
+      }
+      if (githubToken) {
+        document.getElementById('githubTokenInput').value = githubToken;
+      }
+    }
+    
+    function saveGistConfig() {
+      gistId = document.getElementById('gistIdInput').value.trim();
+      githubToken = document.getElementById('githubTokenInput').value.trim();
+      
+      if (!gistId) {
+        showError('請輸入 Gist ID');
+        return;
+      }
+      
+      localStorage.setItem('dkip_gist_id', gistId);
+      if (githubToken) {
+        localStorage.setItem('dkip_github_token', githubToken);
+      }
+      
+      document.getElementById('gistRawUrl').textContent = `https://gist.githubusercontent.com/[你的GitHub名稱]/${gistId}/raw/dkip-signatures.json`;
+      showSuccess('設定已儲存！');
+      showRegisterSection();
+      loadSignatures();
+    }
+    
+    function showRegisterSection() {
+      document.getElementById('setupSection').style.display = 'none';
+      document.getElementById('registerSection').style.display = 'block';
+      document.getElementById('listSection').style.display = 'block';
+    }
+    
+    // 生成唯一簽章
+    function generateSignature(id) {
+      let encoded = '';
+      let num = id;
+      for (let i = 0; i < 4; i++) {
+        encoded = ZERO_WIDTH_CHARS[num % 4] + encoded;
+        num = Math.floor(num / 4);
+      }
+      return SIG_PREFIX + encoded;
+    }
+    
+    // 驗證 Discord URL
+    function isValidDiscordUrl(url) {
+      return url.startsWith('https://cdn.discordapp.com/attachments/');
+    }
+    
+    // 預覽圖片
+    async function previewImage() {
+      const url = document.getElementById('imageUrl').value.trim();
+      const errorMsg = document.getElementById('errorMsg');
+      const previewImg = document.getElementById('previewImg');
+      const registerBtn = document.getElementById('registerBtn');
+      
+      errorMsg.classList.remove('show');
+      
+      if (!url) {
+        showError('請輸入圖片網址');
+        return;
+      }
+      
+      if (!isValidDiscordUrl(url)) {
+        showError('只接受 Discord CDN 網址');
+        return;
+      }
+      
+      previewImg.style.display = 'none';
+      previewImg.src = url;
+      
+      previewImg.onload = function() {
+        previewImg.classList.add('show');
+        registerBtn.disabled = false;
+        currentImageUrl = url;
+      };
+      
+      previewImg.onerror = function() {
+        showError('圖片載入失敗');
+        registerBtn.disabled = true;
+      };
+    }
+    
+    // 註冊簽章
+    async function registerSignature() {
+      const url = document.getElementById('imageUrl').value.trim();
+      const errorMsg = document.getElementById('errorMsg');
+      const successMsg = document.getElementById('successMsg');
+      const resultSection = document.getElementById('resultSection');
+      const registerBtn = document.getElementById('registerBtn');
+      
+      errorMsg.classList.remove('show');
+      successMsg.classList.remove('show');
+      registerBtn.disabled = true;
+      registerBtn.textContent = '處理中...';
+      
+      try {
+        // 先載入現有簽章
+        await loadSignatures();
+        
+        // 檢查是否已存在
+        const existing = signatures.find(s => s.url === url);
+        if (existing) {
+          currentSignature = existing.keyword;
+          showSuccess('此圖片已註冊過');
+        } else {
+          // 生成新簽章
+          const newId = signatures.length + 1;
+          currentSignature = generateSignature(newId);
+          signatures.push({
+            keyword: currentSignature,
+            url: url
+          });
+          showSuccess('新簽章已生成！');
+        }
+        
+        // 顯示結果
+        document.getElementById('signatureCode').textContent = currentSignature;
+        resultSection.classList.add('show');
+        
+        // 更新 Gist
+        await updateGist();
+        
+        // 重新整理列表
+        await loadSignatures();
+        
+      } catch (err) {
+        showError(err.message);
+      } finally {
+        registerBtn.disabled = false;
+        registerBtn.textContent = '✨ 生成簽章';
+      }
+    }
+    
+    // 從 Gist 載入簽章
+    async function loadSignatures() {
+      if (!gistId) return;
+      
+      try {
+        const response = await fetch(`https://api.github.com/gists/${gistId}`);
+        const data = await response.json();
+        
+        if (data.files && data.files['dkip-signatures.json']) {
+          const content = data.files['dkip-signatures.json'].content;
+          signatures = JSON.parse(content);
+        } else {
+          signatures = [];
+        }
+        
+        renderSignatureList();
+        updateStats();
+        updateJsonExport();
+        
+      } catch (err) {
+        console.error('載入失敗:', err);
+        signatures = [];
+        renderSignatureList();
+      }
+    }
+    
+    // 更新 Gist
+    async function updateGist() {
+      if (!gistId || !githubToken) {
+        throw new Error('需要 GitHub Token 才能儲存到 Gist');
+      }
+      
+      const response = await fetch(`https://api.github.com/gists/${gistId}`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `token ${githubToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          files: {
+            'dkip-signatures.json': {
+              content: JSON.stringify(signatures, null, 2)
+            }
+          }
+        })
+      });
+      
+      if (!response.ok) {
+        throw new Error('更新 Gist 失敗，請檢查 Token 權限');
+      }
+    }
+    
+    // 渲染簽章列表
+    function renderSignatureList() {
+      const listEl = document.getElementById('sigList');
+      
+      if (signatures.length === 0) {
+        listEl.innerHTML = '<p style="color: #888; text-align: center;">暫無註冊的簽章</p>';
+        return;
+      }
+      
+      listEl.innerHTML = signatures.map((item, idx) => `
+        <div class="sig-item">
+          <img src="${item.url}" alt="簽章圖片" 
+               onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 50 50%22><text y=%2235%22 font-size=%2230%22>🖼️</text></svg>'">
+          <div class="sig-info">
+            <div style="color: #00ff88; font-size: 0.9rem;">簽章 #${idx + 1}</div>
+            <div class="sig-code">${item.keyword.substring(0, 4)}...${item.keyword.slice(-4)}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    function updateStats() {
+      document.getElementById('totalSigs').textContent = signatures.length;
+    }
+    
+    function updateJsonExport() {
+      document.getElementById('jsonExport').value = JSON.stringify(signatures, null, 2);
+    }
+    
+    // 複製功能
+    function copySignature() {
+      navigator.clipboard.writeText(currentSignature).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        const originalText = btn.textContent;
+        btn.textContent = '已複製！';
+        setTimeout(() => btn.textContent = originalText, 1500);
+      });
+    }
+    
+    function copyJsonExport() {
+      const textarea = document.getElementById('jsonExport');
+      textarea.select();
+      document.execCommand('copy');
+      showSuccess('JSON 已複製到剪貼簿！');
+    }
+    
+    // 顯示訊息
+    function showError(msg) {
+      const el = document.getElementById('errorMsg');
+      el.textContent = '❌ ' + msg;
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 5000);
+    }
+    
+    function showSuccess(msg) {
+      const el = document.getElementById('successMsg');
+      el.textContent = '✅ ' + msg;
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 5000);
+    }
+    
+    // 初始化
+    document.addEventListener('DOMContentLoaded', loadConfig);
+  </script>
+</body>
+</html>
