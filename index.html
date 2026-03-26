@@ -601,16 +601,33 @@
 
     // 從 Gist 載入簽章
     async function loadSignatures() {
-      if (!gistId) return;
+      console.log('[GSS] 開始載入簽章, gistId:', gistId);
+
+      if (!gistId) {
+        console.error('[GSS] 錯誤: gistId 為空');
+        showError('Gist ID 未設定');
+        return;
+      }
+
+      const listEl = document.getElementById('sigList');
+      listEl.innerHTML = '<p style="color: #888; text-align: center;">載入中...</p>';
 
       try {
         const response = await fetch(`https://api.github.com/gists/${gistId}`);
+        console.log('[GSS] GitHub API 回應:', response.status);
+
+        if (!response.ok) {
+          throw new Error(`GitHub API 錯誤: ${response.status}`);
+        }
+
         const data = await response.json();
 
         if (data.files && data.files['GSS-signatures.json']) {
           const content = data.files['GSS-signatures.json'].content;
           signatures = JSON.parse(content);
+          console.log('[GSS] 載入成功, 簽章數量:', signatures.length);
         } else {
+          console.warn('[GSS] Gist 中沒有 GSS-signatures.json 檔案');
           signatures = [];
         }
 
@@ -619,9 +636,10 @@
         updateJsonExport();
 
       } catch (err) {
-        console.error('載入失敗:', err);
+        console.error('[GSS] 載入失敗:', err);
         signatures = [];
-        renderSignatureList();
+        listEl.innerHTML = `<p style="color: #ff6b6b; text-align: center;">❌ 載入失敗: ${err.message}</p>`;
+        showError('無法載入簽章列表: ' + err.message);
       }
     }
 
