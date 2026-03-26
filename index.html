@@ -339,33 +339,28 @@
       <p class="subtitle">General Sticker System (GitHub Pages + Gist)</p>
     </header>
 
-    <div class="setup-section" id="setupSection">
-      <h3>⚙️ 初始設定</h3>
-      <p>此版本使用 <strong>GitHub Gist</strong> 作為免費資料庫，請先建立一個 Gist：</p>
-      <ol style="color: #ccc; margin-left: 20px; line-height: 1.8;">
-        <li>前往 <a href="https://gist.github.com" target="_blank" style="color: #00d4ff;">gist.github.com</a></li>
-        <li>建立一個新的 Gist，檔名填 <code>GSS-signatures.json</code></li>
-        <li>內容先填入 <code>[]</code> (空陣列)</li>
-        <li>點擊 "Create secret gist" (建議用 secret 避免被搜尋)</li>
-        <li>複製 Gist ID (網址中最後那串字符)</li>
-      </ol>
+    <!-- 管理員設定面板（隱藏） -->
+    <div class="setup-section" id="setupSection" style="display: none;">
+      <h3>⚙️ 管理員設定</h3>
+      <p>Gist ID（一般使用者不需要修改）：</p>
       <div class="input-group" style="margin-top: 15px;">
-        <label>Gist ID</label>
-        <input type="text" id="gistIdInput" placeholder="例如: a1b2c3d4e5f6...">
+        <input type="text" id="gistIdInput" value="1d455ea28bec8b37797fee636188f189">
       </div>
       <button class="btn btn-primary" onclick="saveGistConfig()">💾 儲存設定</button>
       <button class="btn btn-secondary" onclick="testConnection()" style="margin-left: 8px;">🧪 測試連線</button>
       <button class="btn btn-secondary" onclick="testWorker()" style="margin-left: 8px;">🌐 測試 Worker</button>
+      <button class="btn btn-secondary" onclick="hideSetupPanel()" style="margin-left: 8px;">🔙 返回</button>
       <div id="debugInfo"
         style="margin-top: 15px; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 6px; font-family: monospace; font-size: 12px; color: #888; display: none;">
       </div>
     </div>
 
-    <div class="card" id="registerSection" style="display: none;">
+    <div class="card" id="registerSection">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
         <h2>📝 註冊新簽章</h2>
-        <button class="btn btn-secondary" onclick="resetConfig()" style="padding: 8px 16px; font-size: 0.85rem;">
-          ⚙️ 重新設定
+        <button class="btn btn-secondary" onclick="showSetupPanel()"
+          style="padding: 8px 16px; font-size: 0.85rem; display: none;" id="adminBtn">
+          ⚙️ 管理員
         </button>
       </div>
       <div class="input-group">
@@ -400,7 +395,7 @@
       </div>
     </div>
 
-    <div class="card" id="listSection" style="display: none;">
+    <div class="card" id="listSection">
       <h2>📋 已註冊簽章列表</h2>
       <div class="stats">
         <div class="stat-item">
@@ -426,7 +421,7 @@
 
     <div class="gist-info">
       <strong>💡 給插件使用者的資訊：</strong><br>
-      插件同步網址：<code id="gistRawUrl">請先完成設定</code><br>
+      插件同步網址：<code>https://gist.githubusercontent.com/ElfinL/1d455ea28bec8b37797fee636188f189/raw/GSS-signatures.json</code><br>
       <small style="color: #888;">將此網址貼到 GSS 插件的「遠端 JSON 網址」欄位即可同步簽章</small>
     </div>
   </div>
@@ -438,22 +433,21 @@
 
     let currentSignature = '';
     let currentImageUrl = '';
-    let gistId = '';
+    // 內建 Gist ID - 方案 A：所有人共用同一個簽章庫
+    let gistId = '1d455ea28bec8b37797fee636188f189';
     let signatures = [];
 
     // 設定
     const WORKER_URL = 'https://small-wildflower-484d.elfin0wdwd.workers.dev';
 
-    // 從 localStorage 載入設定
-    function loadConfig() {
-      gistId = localStorage.getItem('gss_gist_id') || '';
-
-      if (gistId) {
-        document.getElementById('gistIdInput').value = gistId;
-        document.getElementById('gistRawUrl').textContent = `https://gist.githubusercontent.com/[你的GitHub名稱]/${gistId}/raw/GSS-signatures.json`;
-        showRegisterSection();
-        loadSignatures();
-      }
+    // 初始化 - 方案 A：直接顯示註冊界面，無需設定
+    function init() {
+      // 直接顯示註冊界面
+      showRegisterSection();
+      // 更新插件資訊
+      document.getElementById('gistRawUrl').textContent = `https://gist.githubusercontent.com/ElfinL/${gistId}/raw/GSS-signatures.json`;
+      // 載入現有簽章
+      loadSignatures();
     }
 
     function saveGistConfig() {
@@ -473,6 +467,20 @@
     }
 
     function showRegisterSection() {
+      document.getElementById('setupSection').style.display = 'none';
+      document.getElementById('registerSection').style.display = 'block';
+      document.getElementById('listSection').style.display = 'block';
+    }
+
+    // 顯示管理員設定面板
+    function showSetupPanel() {
+      document.getElementById('registerSection').style.display = 'none';
+      document.getElementById('listSection').style.display = 'none';
+      document.getElementById('setupSection').style.display = 'block';
+    }
+
+    // 隱藏管理員設定面板
+    function hideSetupPanel() {
       document.getElementById('setupSection').style.display = 'none';
       document.getElementById('registerSection').style.display = 'block';
       document.getElementById('listSection').style.display = 'block';
