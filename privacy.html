@@ -88,27 +88,34 @@
         your sticker data or settings.</p>
 
     <h2>4. 第三方服務 / Third-Party Services</h2>
-    <p>本擴充功能與 <strong>DLive GraphQL API</strong> 和 <strong>Twitch 聊天服務</strong>互動，用於發送聊天訊息。</p>
-    <p>This extension interacts with the <strong>DLive GraphQL API</strong> and <strong>Twitch chat services</strong>
-        for sending chat messages.</p>
-    <p><strong>我們不會傳輸您的貼圖資料、標籤或任何個人資訊</strong>至第三方。發送的內容僅為您手動選擇的貼圖 ID。</p>
+    <p>本擴充功能與以下第三方服務互動：</p>
+    <p>This extension interacts with the following third-party services:</p>
+    <ul>
+        <li><strong>DLive GraphQL API</strong> 和 <strong>Twitch 聊天服務</strong>：用於發送聊天訊息 / For sending chat messages</li>
+        <li><strong>Twitch GQL API、DLive GraphQL、Kick API、Vaughn API</strong>：用於 TSC（實況編織）功能的開台狀態檢測（僅查詢頻道是否在線，無需登入憑證）/
+            For TSC stream status checking (online/offline status only, no login credentials required)</li>
+    </ul>
+    <p><strong>我們不會傳輸您的貼圖資料、標籤或任何個人資訊</strong>至第三方。發送的內容僅為您手動選擇的貼圖 ID，以及 TSC 功能中您手動設定的公開頻道 URL。</p>
     <p><strong>We do not transmit your sticker data, tags, or any personal information</strong> to third parties. Only
-        the
-        sticker ID you manually select is sent.</p>
+        the sticker ID you manually select is sent, along with public channel URLs you manually configure in the TSC
+        feature.</p>
+    <p>開台狀態查詢結果（在線狀態、觀看人數、實況標題）僅儲存在您的本地裝置快取中（5 分鐘），不會上傳至任何伺服器。/ Stream status results are cached locally only (5
+        minutes) and never uploaded to any server.</p>
 
     <h2>5. 權限使用說明 / Permissions Usage</h2>
-    <p>本擴充功能申請使用 <strong>tabs</strong> 權限，僅用於以下功能：</p>
-    <p>This extension requests the <strong>tabs</strong> permission solely for the following purposes:</p>
+    <p>本擴充功能申請使用 <strong>storage</strong> 權限，僅用於以下功能：</p>
+    <p>This extension requests the <strong>storage</strong> permission solely for the following purposes:</p>
     <ul>
-        <li><strong>偵測當前分頁 / Current Tab Detection：</strong>判斷使用者是否位於支援的直播平台（如 Twitch、DLive），以載入對應的 UI。</li>
-        <li><strong>功能同步 / Feature Synchronization：</strong>當使用者更改設定時，同步更新所有已開啟的直播分頁狀態。</li>
-        <li><strong>操作指令 / Control Commands：</strong>實作劇院模式等 UI 調整功能。</li>
+        <li><strong>本地資料儲存 / Local Data Storage：</strong>使用 <code>chrome.storage.local</code> API 在您的本地裝置上儲存貼圖
+            ID、標籤、最愛設定等資料。</li>
+        <li><strong>設定同步 / Settings Synchronization：</strong>在不同分頁之間同步您的貼圖設定和偏好。</li>
     </ul>
     <div class="highlight">
         <strong>重要聲明 / Important Note：</strong><br>
-        我們雖然使用 tabs API，但<strong>絕不紀錄、儲存或傳輸您的瀏覽紀錄或任何分頁 URL 至外部伺服器</strong>。所有操作均在本地端即時完成。<br><br>
-        While we use the tabs API, we <strong>NEVER log, store, or transmit your browsing history or any tab URLs to
-            external servers</strong>. All operations are performed locally in real-time.
+        我們僅使用 storage API 在您的本地裝置上儲存資料，<strong>絕不紀錄、儲存或傳輸您的瀏覽紀錄或任何分頁 URL 至外部伺服器</strong>。所有操作均在本地端即時完成。<br><br>
+        We only use the storage API to store data on your local device, and <strong>NEVER log, store, or transmit your
+            browsing history or any tab URLs to external servers</strong>. All operations are performed locally in
+        real-time.
     </div>
 
     <h2>6. 聯絡方式 / Contact</h2>
