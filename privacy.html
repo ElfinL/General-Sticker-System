@@ -103,19 +103,28 @@
         minutes) and never uploaded to any server.</p>
 
     <h2>5. 權限使用說明 / Permissions Usage</h2>
-    <p>本擴充功能申請使用 <strong>storage</strong> 權限，僅用於以下功能：</p>
-    <p>This extension requests the <strong>storage</strong> permission solely for the following purposes:</p>
+    <p>本擴充功能申請使用以下權限，僅用於所述功能：</p>
+    <p>This extension requests the following permissions solely for the stated purposes:</p>
+
+    <h3>tabs 權限 / tabs Permission</h3>
     <ul>
-        <li><strong>本地資料儲存 / Local Data Storage：</strong>使用 <code>chrome.storage.local</code> API 在您的本地裝置上儲存貼圖
-            ID、標籤、最愛設定等資料。</li>
-        <li><strong>設定同步 / Settings Synchronization：</strong>在不同分頁之間同步您的貼圖設定和偏好。</li>
+        <li><strong>開啟說明頁面 / Open Help Pages：</strong>當使用者點擊「?」幫助按鈕或更新日誌時，使用 <code>chrome.tabs.create</code>
+            開啟擴充功能的說明文件（help.html、updatelog.html、editor.html）。</li>
+        <li><strong>功能同步 / Feature Synchronization：</strong>TSC（實況編織）功能使用 <code>chrome.tabs.sendMessage</code>
+            同步跨分頁狀態（如貼圖庫更新時通知所有已開啟的直播頁面）。</li>
+    </ul>
+
+    <h3>all_frames 設定 / all_frames Setting</h3>
+    <ul>
+        <li><strong>聊天室 iframe 支援 / Chat Room iframe Support：</strong>本擴充使用 <code>all_frames: true</code>
+            設定，將聊天面板等功能腳本注入 YouTube 等平台的聊天室 iframe 中。這是必要的技術方案，因為 YouTube 聊天室運行在獨立的 iframe 內（網址為
+            youtube.com/live_chat）。我們<strong>不會</strong>因此存取或收集任何 iframe 內的個人資料，僅用於顯示貼圖面板。</li>
     </ul>
     <div class="highlight">
         <strong>重要聲明 / Important Note：</strong><br>
-        我們僅使用 storage API 在您的本地裝置上儲存資料，<strong>絕不紀錄、儲存或傳輸您的瀏覽紀錄或任何分頁 URL 至外部伺服器</strong>。所有操作均在本地端即時完成。<br><br>
-        We only use the storage API to store data on your local device, and <strong>NEVER log, store, or transmit your
-            browsing history or any tab URLs to external servers</strong>. All operations are performed locally in
-        real-time.
+        我們雖然使用 tabs API，但<strong>絕不紀錄、儲存或傳輸您的瀏覽紀錄或任何分頁 URL 至外部伺服器</strong>。所有操作均在本地端即時完成。<br><br>
+        While we use the tabs API, we <strong>NEVER log, store, or transmit your browsing history or any tab URLs to
+            external servers</strong>. All operations are performed locally in real-time.
     </div>
 
     <h2>6. 聯絡方式 / Contact</h2>
