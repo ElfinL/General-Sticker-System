@@ -106,13 +106,6 @@
     <p>本擴充功能申請使用以下權限，僅用於所述功能：</p>
     <p>This extension requests the following permissions solely for the stated purposes:</p>
 
-    <h3>tabs 權限 / tabs Permission</h3>
-    <ul>
-        <li><strong>開啟說明頁面 / Open Help Pages：</strong>當使用者點擊「?」幫助按鈕或更新日誌時，使用 <code>chrome.tabs.create</code>
-            開啟擴充功能的說明文件（help.html、updatelog.html、editor.html）。</li>
-        <li><strong>功能同步 / Feature Synchronization：</strong>TSC（實況編織）功能使用 <code>chrome.tabs.sendMessage</code>
-            同步跨分頁狀態（如貼圖庫更新時通知所有已開啟的直播頁面）。</li>
-    </ul>
 
     <h3>all_frames 設定 / all_frames Setting</h3>
     <ul>
@@ -122,8 +115,8 @@
     </ul>
     <div class="highlight">
         <strong>重要聲明 / Important Note：</strong><br>
-        我們雖然使用 tabs API，但<strong>絕不紀錄、儲存或傳輸您的瀏覽紀錄或任何分頁 URL 至外部伺服器</strong>。所有操作均在本地端即時完成。<br><br>
-        While we use the tabs API, we <strong>NEVER log, store, or transmit your browsing history or any tab URLs to
+        本擴充功能<strong>絕不紀錄、儲存或傳輸您的瀏覽紀錄或任何分頁 URL 至外部伺服器</strong>。所有操作均在本地端即時完成。<br><br>
+        This extension <strong>NEVER logs, stores, or transmits your browsing history or any tab URLs to
             external servers</strong>. All operations are performed locally in real-time.
     </div>
 
