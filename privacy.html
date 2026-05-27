@@ -106,6 +106,35 @@
     <p>本擴充功能申請使用以下權限，僅用於所述功能：</p>
     <p>This extension requests the following permissions solely for the stated purposes:</p>
 
+    <h3>storage / 儲存</h3>
+    <ul>
+        <li>儲存貼圖 ID、標籤、常用、自定義平台設定（含網域與聊天室選擇器）／Store sticker IDs, tags, favorites, and custom platform settings (domain and chat selectors) on your device only.</li>
+    </ul>
+
+    <h3>scripting / 腳本注入</h3>
+    <ul>
+        <li>僅在使用者於設定中<strong>手動新增自定義平台並按儲存、且同意該網域權限</strong>後，向該網域註冊與內建平台相同的貼圖功能腳本（<code>chrome.scripting.registerContentScripts</code>）。</li>
+        <li>不會對使用者未新增、未授權的網站注入或執行程式碼。</li>
+        <li>Used only after the user manually adds a custom platform, clicks Save, and grants site access, to register sticker scripts on that domain via <code>chrome.scripting.registerContentScripts</code>. No injection on sites the user has not configured and approved.</li>
+    </ul>
+
+    <h3>host_permissions（安裝時）／Host access at install</h3>
+    <ul>
+        <li>僅限已支援的直播平台（如 Twitch、Kick、YouTube、Vaughn、w.tv、beamstream 等），用於在聊天室顯示貼圖、轉換貼圖 ID 與發送訊息。</li>
+        <li>Limited to listed live-streaming sites for chat sticker display, ID-to-image conversion, and sending messages in chat.</li>
+    </ul>
+
+    <h3>optional_host_permissions（選用）／Optional host access</h3>
+    <ul>
+        <li>僅在使用者<strong>明確新增自定義平台並按儲存</strong>時，才會向 Chrome 請求該使用者填寫之網域的存取權；使用者可拒絕，拒絕則該站不啟用 GSS。</li>
+        <li>Requested only when the user explicitly adds a custom platform and clicks Save, for the domain they enter. The user may deny; the site will not be enabled without approval.</li>
+    </ul>
+
+    <h3>自定義平台資料／Custom platform data</h3>
+    <ul>
+        <li>自定義平台的網域、CSS 選擇器與腳本邏輯僅存於本機 <code>chrome.storage.local</code>，不上傳。</li>
+        <li>Custom platform domain, selectors, and logic are stored locally only in <code>chrome.storage.local</code> and are not uploaded.</li>
+    </ul>
 
     <h3>all_frames 設定 / all_frames Setting</h3>
     <ul>
