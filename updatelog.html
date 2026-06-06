@@ -216,17 +216,27 @@
     // 版本數據 - 所有語言的版本記錄
     const VERSION_DATA = {
       'zh-TW': [
-    {
-  "version": "v7.2",
+        {
+  "version": "v7.3",
   "date": "6月6日",
   "isLatest": true,
   "content": [
-    "✨ 新增貼圖記錄牆功能（貼圖記錄牆開關按鈕位置在聊天室彈出的貼圖面板下一頁的右邊）",
-    " 為了解決滾軸兼容性問題，決定將聊天室的大圖展示移至貼圖記錄牆",
-    " 過去大圖一直無法完美匹配聊天室的原生滾軸功能，過去都是用指令和標記式的方式模擬，但維護起來耗時",
-    "✅ 新方法既能解決滾軸問題，又能繼續展示大圖",
-    "⚠️ 已知問題：部分格式尚未完全適應此次改動、新功能翻譯問題",
-    "📌 上述問題將在下個版本修正"
+    "✨ 功能重構：將聊天室原有的放大/縮小機制，全面重構成「大圖與小圖切換功能」，相容當前平台渲染邏輯。",
+    "🔧 本地化修復：修正了已知的翻譯顯示報錯。",
+    "⚠️ 代碼暫停公告：由於本週的 AI 開發工具免費額度已物理耗盡，後續更新將暫停 2-3 天，等待額度刷新。",
+    "📌 關於開發狀態：目前維持「遊牧民族兼乞丐式」的極限開發模式。一直以來，我都是在各大平台的免費算力邊界上到處「蹭額度」來維護這個插件。近期這類免費資源正在加速枯竭。",
+    "💬 關於盈利：暫時依舊沒有開放贊助、置入廣告或開啟收費的排程。這種遊牧式的極限生存開發，或許是一種另類浪漫吧。"
+  ]
+},
+      {
+  "version": "v7.2",
+  "date": "6月6日",
+  "content": [
+    "✨ 新增貼圖記錄牆功能（開關位於貼圖面板下一頁右側）",
+    "🖼️ 大圖展示移至貼圖記錄牆，解決聊天室原生滾軸兼容性問題",
+    "🔧 捨過往指令與標記模擬方式，新方法維護更輕鬆",
+    "⚠️ 已知問題：部分格式尚未完全適應此次改動、翻譯問題待修",
+    "📌 上述已知問題將於下個版本修正"
   ]
 },
         {
@@ -649,17 +659,27 @@
         }
       ],
       'zh-CN': [
-      {
-  "version": "v7.2",
+        {
+  "version": "v7.3",
   "date": "6月6日",
   "isLatest": true,
   "content": [
-    "✨ 新增贴图记录墙功能（贴图记录墙开关按钮位置在聊天室弹出的贴图面板下一页的右边）",
-    " 为了解决滚动轴兼容性问题，决定将聊天室的大图展示移至贴图记录墙",
-    " 过去大图一直无法完美匹配聊天室的原生滚动轴功能，过去都是用指令和标记式的方式模拟，但维护起来耗时",
-    "✅ 新方法既能解决滚动轴问题，又能继续展示大图",
-    "⚠️ 已知问题：部分格式尚未完全适应此次改动、新功能翻译问题",
-    "📌 上述问题将在下个版本修正"
+    "✨ 功能重构：将聊天室原有的放大/缩小机制，全面重构为「大图与小图切换功能」，兼容当前平台渲染逻辑。",
+    "🔧 本地化修复：修正了已知的翻译显示报错。",
+    "⚠️ 代码暂停公告：由于本周的 AI 开发工具免费额度已物理耗尽，后续更新将暂停 2-3 天，等待额度刷新。",
+    "📌 关于开发状态：目前维持「游牧民族兼乞丐式」的极限开发模式。一直以来，我都是在各大平台的免费算力边界上到处「蹭额度」来维护这个插件。近期这类免费资源正在加速枯竭。",
+    "💬 关于盈利：暂时依旧没有开放赞助、植入广告或开启收费的排程。这种游牧式的极限生存开发，或许是一种另类浪漫吧。"
+  ]
+},
+        {
+  "version": "v7.2",
+  "date": "6月6日",
+  "content": [
+    "✨ 新增贴图记录墙功能（开关位于贴图面板下一页右侧）",
+    "🖼️ 大图展示移至贴图记录墙，解决聊天室原生滚动轴兼容性问题",
+    "🔧 舍弃过往指令与标记模拟方式，新方法维护更轻松",
+    "⚠️ 已知问题：部分格式尚未完全适应此次改动、翻译问题待修",
+    "📌 上述已知问题将于下个版本修正"
   ]
 },
         {
@@ -1076,16 +1096,26 @@
       ],
       'en': [
         {
-  "version": "v7.2",
+  "version": "v7.3",
   "date": "June 6",
   "isLatest": true,
   "content": [
-    "✨ Added Sticker History Wall feature (toggle button is located on the right side of the next page in the chatroom's sticker panel)",
-    " To resolve scroll compatibility issues, large image display in the chatroom has been moved to the Sticker History Wall",
-    " Previously, large images could not perfectly match the chatroom's native scroll functionality, and commands/markers were used to simulate it, which was time-consuming to maintain",
-    "✅ The new approach both solves the scroll issue and continues to display large images",
-    "⚠️ Known issues: Some formats are not yet fully adapted to this change; translation issues with the new feature",
-    "📌 The above issues will be fixed in the next version"
+    "✨ Feature Refactor: Replaced the chatroom zoom mechanism with a new 'Large/Small Sticker Toggle' to fix platform rendering compatibility.",
+    "🔧 Localization: Fixed ongoing translation and display rendering bugs.",
+    "⚠️ Dev Freeze Notice: This week's free AI tool quota has been completely exhausted. Further updates are suspended for 2-3 days until the limit resets.",
+    "📌 Dev Methodology: Currently running under a 'Nomadic / Mendicant' extreme development framework. This extension survives by scavenging free compute quotas across various AI platforms. Free resources are shrinking rapidly.",
+    "💬 Monetization: No plans for donations, ads, or paywalls at the moment. In an era of corporate compute monopoly, Perhaps this nomadic survival is just my alternative take on romance."
+  ]
+},
+        {
+  "version": "v7.2",
+  "date": "June 6",
+  "content": [
+    "✨ Added Sticker History Wall (toggle button on the right side of the next page in the sticker panel)",
+    "🖼️ Large image display moved to Sticker History Wall to resolve native scroll compatibility issues in chatroom",
+    "🔧 Replaced previous command-based & marker simulation method – new approach is easier to maintain",
+    "⚠️ Known issues: Some formats not fully adapted to this change; translation issues",
+    "📌 The above known issues will be fixed in the next version"
   ]
 },
         {
@@ -1501,16 +1531,26 @@
       ],
       'ja': [
         {
-  "version": "v7.2",
+  "version": "v7.3",
   "date": "6月6日",
   "isLatest": true,
   "content": [
-    "✨ ステッカー履歴ウォール機能を追加（トグルボタンの位置：チャットルームのステッカーパネル → 次のページ → 右側）",
-    " スクロール互換性の問題を解決するため、チャットルームの大画像表示をステッカー履歴ウォールに移動しました",
-    " 従来、大画像はチャットルームのネイティブスクロール機能と完全に一致せず、コマンドとマーカー方式でシミュレーションしていましたが、メンテナンスに時間がかかっていました",
-    "✅ 新しい方法はスクロール問題を解決しつつ、大画像表示を継続できます",
-    "⚠️ 既知の問題：一部の形式が今回の変更に完全に対応していない、新機能の翻訳問題",
-    "📌 上記の問題は次回バージョンで修正されます"
+    "✨ 機能再構築：チャットルーム従来の拡大・縮小機能を「大画像・小画像切り替え機能」へ全面刷新し、現行プラットフォームのレンダリングロジックに対応しました。",
+    "🔧 ローカライズ修正：既知の翻訳表示エラーを修正しました。",
+    "⚠️ 開発一時停止のお知らせ：今週分のAI開発ツールの無料枠（クォータ）が物理的に枯渇したため、枠が更新されるまで2〜3日ほどアップデートを停止します。",
+    "📌 開発状況について：現在は「遊牧民兼乞食スタイル」の極限開発モードを維持しています。これまで各大手の無料計算リソースの境界線で「枠をハイエナ」しながら本拡張機能を維持してきましたが、最近こうした無料リソースの枯渇が加速しています。",
+    "💬 収益化について：現時点でドネーション、広告、有料化の予定は一切ありません。資本に算力が独占されるこの時代において、このような遊牧民的な極限生存開発も、ある種の型破りなロマンと言えるのかもしれません。"
+  ]
+},
+        {
+  "version": "v7.2",
+  "date": "6月6日",
+  "content": [
+    "✨ ステッカー履歴ウォール機能を追加（ステッカーパネルの次のページ、右側に切り替えボタンがあります）",
+    "🖼️ 大きな画像表示をステッカー履歴ウォールに移動し、チャットルームのネイティブスクロール互換性の問題を解決",
+    "🔧 従来のコマンド＆マーカー方式を廃止 – 新しい方法でメンテナンスが容易に",
+    "⚠️ 既知の問題：一部の形式が今回の変更に完全に対応していない、翻訳の問題",
+    "📌 上記の既知の問題は次回バージョンで修正予定"
   ]
 },
         {
@@ -1926,16 +1966,26 @@
       ],
       'ko': [
         {
-  "version": "v7.2",
+  "version": "v7.3",
   "date": "6월 6일",
   "isLatest": true,
   "content": [
-    "✨ 스티커 기록 월 기능 추가 (토글 버튼 위치: 채팅방 스티커 패널의 다음 페이지 오른쪽)",
-    " 스크롤 호환성 문제를 해결하기 위해 채팅방의 대형 이미지 표시를 스티커 기록 월로 이동하기로 결정했습니다",
-    " 과거에는 대형 이미지가 채팅방의 네이티브 스크롤 기능과 완벽하게 일치하지 않아 명령어와 마커 방식으로 시뮬레이션했지만, 유지보수에 시간이 많이 들었습니다",
-    "✅ 새로운 방법은 스크롤 문제를 해결하면서 대형 이미지를 계속 표시할 수 있습니다",
-    "⚠️ 알려진 문제: 일부 형식이 이번 변경에 완전히 적응하지 못함, 새로운 기능의 번역 문제",
-    "📌 위 문제들은 다음 버전에서 수정됩니다"
+    "✨ 기능 재구축: 채팅방의 기존 확대/축소 기능을 '큰 이미지/작은 이미지 전환 기능'으로 전면 개편하여 현재 플랫폼의 렌더링 로직과의 호환성을 해결했습니다.",
+    "🔧 로컬라이징 수정: 이미 확인된 번역 표시 오류를 수정했습니다.",
+    "⚠️ 개발 일시 중단 안내: 이번 주 AI 개발 툴의 무료 제공량(Quota)이 완전히 소진되어 리셋될 때까지 2~3일간 업데이트가 중단됩니다.",
+    "📌 개발 현황에 대하여: 현재 '유목민 및 거지 방식'의 극한 개발 모드를 유지하고 있습니다. 그동안 여러 대형 플랫폼의 무료 연산 자원 경계선에서 '용량을 얻어 쓰며' 이 확장 프로그램을 유지해 왔으나, 최근 이러한 무료 리소스가 빠르게 고갈되고 있습니다.",
+    "💬 수익화에 대하여: 당분간 후원, 광고 삽입, 유료화 계획은 전혀 없습니다. 자본이 연산력을 독점하는 이 시대에, 이런 유목민적인 극한의 생존 개발도 나름의 색다른 낭만이 아닐까 싶습니다."
+  ]
+},
+        {
+  "version": "v7.2",
+  "date": "6월 6일",
+  "content": [
+    "✨ 스티커 기록 월 기능 추가 (토글 버튼 위치: 스티커 패널 다음 페이지 오른쪽)",
+    "🖼️ 대형 이미지 표시를 스티커 기록 월로 이동 – 채팅방 네이티브 스크롤 호환성 문제 해결",
+    "🔧 기존 명령어 및 마커 방식 대체 – 새로운 방식으로 유지보수 간소화",
+    "⚠️ 알려진 문제: 일부 형식이 이번 변경에 완전히 적응하지 못함, 번역 문제",
+    "📌 위 알려진 문제는 다음 버전에서 수정될 예정입니다"
   ]
 },
         {
