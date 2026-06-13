@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GSS 簽章註冊中心 - GitHub 版</title>
+  <title>General Sticker System (GSS)</title>
   <style>
     * {
       margin: 0;
@@ -14,810 +14,360 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      background: linear-gradient(180deg, #0b0f14 0%, #14161c 100%);
+      color: rgba(255, 255, 255, 0.9);
       min-height: 100vh;
-      color: #fff;
       padding: 20px;
     }
 
     .container {
-      max-width: 800px;
+      max-width: 700px;
       margin: 0 auto;
     }
 
-    header {
+    .header {
       text-align: center;
-      padding: 40px 0;
+      padding: 50px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 40px;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      background: linear-gradient(90deg, #00d4ff, #7b2cbf);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .subtitle {
-      color: #888;
-      font-size: 1.1rem;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      padding: 30px;
-      margin-bottom: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .input-group {
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      color: #aaa;
-      font-size: 0.9rem;
-    }
-
-    input[type="text"],
-    input[type="password"] {
-      width: 100%;
-      padding: 14px 18px;
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      background: rgba(0, 0, 0, 0.3);
-      color: #fff;
-      font-size: 1rem;
-      transition: border-color 0.3s;
-    }
-
-    input[type="text"]:focus,
-    input[type="password"]:focus {
-      outline: none;
-      border-color: #00d4ff;
-    }
-
-    .btn {
-      padding: 14px 28px;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
+    .header h1 {
+      font-size: 32px;
       font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-primary {
-      background: linear-gradient(90deg, #00d4ff, #7b2cbf);
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none !important;
-    }
-
-    .preview-section {
-      margin-top: 30px;
-      text-align: center;
-    }
-
-    .preview-image {
-      max-width: 300px;
-      max-height: 200px;
-      border-radius: 12px;
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      margin: 20px auto;
-      display: none;
-    }
-
-    .preview-image.show {
-      display: block;
-    }
-
-    .result-section {
-      margin-top: 30px;
-      padding: 25px;
-      background: rgba(0, 212, 255, 0.1);
-      border-radius: 12px;
-      border: 1px solid rgba(0, 212, 255, 0.3);
-      display: none;
-    }
-
-    .result-section.show {
-      display: block;
-    }
-
-    .signature-display {
-      font-family: monospace;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 15px;
-      border-radius: 8px;
-      margin: 15px 0;
-      word-break: break-all;
-      color: #00ff88;
-      font-size: 0.9rem;
-      position: relative;
-    }
-
-    .copy-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      padding: 6px 12px;
-      font-size: 0.8rem;
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      border-radius: 6px;
-      color: #fff;
-      cursor: pointer;
-    }
-
-    .copy-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .error {
-      color: #ff6b6b;
-      margin-top: 10px;
-      padding: 12px;
-      background: rgba(255, 107, 107, 0.1);
-      border-radius: 8px;
-      display: none;
-    }
-
-    .error.show {
-      display: block;
-    }
-
-    .success {
-      color: #00ff88;
-      margin-top: 10px;
-      padding: 12px;
-      background: rgba(0, 255, 136, 0.1);
-      border-radius: 8px;
-      display: none;
-    }
-
-    .success.show {
-      display: block;
-    }
-
-    .signature-list {
-      margin-top: 20px;
-      max-height: 300px;
-      overflow-y: auto;
-    }
-
-    .sig-item {
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
-      gap: 15px;
-      padding: 15px;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .header .subtitle {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .lang-switch {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .lang-btn {
+      padding: 8px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(10, 12, 16, 0.8);
+      color: rgba(255, 255, 255, 0.7);
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .lang-btn:hover {
+      background: rgba(120, 190, 255, 0.14);
+      border-color: rgba(120, 190, 255, 0.45);
+    }
+
+    .lang-btn.active {
+      background: rgba(120, 190, 255, 0.35);
+      border-color: rgba(120, 190, 255, 0.7);
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .links-section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .link-card {
       background: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-      margin-bottom: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
 
-    .sig-item img {
-      width: 50px;
-      height: 50px;
-      object-fit: cover;
-      border-radius: 8px;
+    .link-card:hover {
+      background: rgba(120, 190, 255, 0.1);
+      border-color: rgba(120, 190, 255, 0.3);
+      transform: translateY(-2px);
     }
 
-    .sig-info {
+    .link-card .icon {
+      font-size: 32px;
+    }
+
+    .link-card .text {
       flex: 1;
     }
 
-    .sig-code {
-      font-family: monospace;
-      font-size: 0.8rem;
-      color: #888;
-      word-break: break-all;
+    .link-card .title {
+      font-size: 18px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 4px;
     }
 
-    .hidden-sig {
-      color: #00ff88;
+    .link-card .description {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
     }
 
-    .hidden-sig::before {
-      content: "👁️ 零寬簽章: ";
-      opacity: 0.7;
+    .link-card .arrow {
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.3);
     }
 
-    .setup-section {
-      background: rgba(255, 193, 7, 0.1);
-      border: 1px solid rgba(255, 193, 7, 0.3);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .setup-section h3 {
-      color: #ffc107;
-      margin-bottom: 15px;
-    }
-
-    .setup-section p {
-      color: #ccc;
-      font-size: 0.9rem;
-      line-height: 1.6;
-      margin-bottom: 10px;
-    }
-
-    .stats {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
-    .stat-item {
+    .footer {
       text-align: center;
-      padding: 15px 25px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
+      padding: 40px 0;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.4);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .stat-value {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #00d4ff;
+    .footer .author {
+      margin-bottom: 8px;
+      color: rgba(255, 255, 255, 0.6);
     }
 
-    .stat-label {
-      color: #888;
-      font-size: 0.85rem;
-      margin-top: 5px;
+    .footer a {
+      color: #4a90e2;
+      text-decoration: none;
+      transition: color 0.2s;
     }
 
-    .export-section {
-      margin-top: 20px;
-      padding: 15px;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 8px;
-    }
-
-    .export-section textarea {
-      width: 100%;
-      height: 100px;
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 6px;
-      color: #fff;
-      font-family: monospace;
-      font-size: 0.8rem;
-      padding: 10px;
-      resize: none;
-    }
-
-    .gist-info {
-      background: rgba(0, 212, 255, 0.05);
-      border-left: 3px solid #00d4ff;
-      padding: 15px;
-      margin: 15px 0;
-      border-radius: 0 8px 8px 0;
-    }
-
-    .gist-info code {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-family: monospace;
-      color: #00d4ff;
+    .footer a:hover {
+      color: #6ba3e8;
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <header>
-      <h1>🔐 GSS 簽章註冊中心</h1>
-      <p class="subtitle">General Sticker System (GitHub Pages + Gist)</p>
-    </header>
-
-    <!-- 管理員設定面板（隱藏） -->
-    <div class="setup-section" id="setupSection" style="display: none;">
-      <h3>⚙️ 管理員設定</h3>
-      <p>Gist ID（一般使用者不需要修改）：</p>
-      <div class="input-group" style="margin-top: 15px;">
-        <input type="text" id="gistIdInput" value="1d455ea28bec8b37797fee636188f189">
-      </div>
-      <button class="btn btn-primary" onclick="saveGistConfig()">💾 儲存設定</button>
-      <button class="btn btn-secondary" onclick="testConnection()" style="margin-left: 8px;">🧪 測試連線</button>
-      <button class="btn btn-secondary" onclick="testWorker()" style="margin-left: 8px;">🌐 測試 Worker</button>
-      <button class="btn btn-secondary" onclick="hideSetupPanel()" style="margin-left: 8px;">🔙 返回</button>
-      <div id="debugInfo"
-        style="margin-top: 15px; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 6px; font-family: monospace; font-size: 12px; color: #888; display: none;">
-      </div>
+    <div class="header">
+      <h1><img src="https://elfinl.github.io/General-Sticker-System/icons/icon48.png" alt="GSS Logo"> General Sticker System</h1>
+      <div class="subtitle" data-i18n="subtitle">通用貼圖系統</div>
     </div>
 
-    <div class="card" id="registerSection">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <h2>📝 註冊新簽章</h2>
-        <button class="btn btn-secondary" onclick="showSetupPanel()"
-          style="padding: 8px 16px; font-size: 0.85rem; display: none;" id="adminBtn">
-          ⚙️ 管理員
-        </button>
-      </div>
-      <div class="input-group">
-        <label for="imageUrl">Discord 圖片網址 (cdn.discordapp.com)</label>
-        <input type="text" id="imageUrl" placeholder="https://cdn.discordapp.com/attachments/...">
-      </div>
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="zh-TW">繁中</button>
+      <button class="lang-btn" data-lang="zh-CN">简中</button>
+      <button class="lang-btn" data-lang="en">English</button>
+      <button class="lang-btn" data-lang="ja">日本語</button>
+      <button class="lang-btn" data-lang="ko">한국어</button>
+    </div>
 
-      <button class="btn btn-primary" id="previewBtn" onclick="previewImage()">
-        👁️ 預覽圖片
-      </button>
-      <button class="btn btn-secondary" id="registerBtn" onclick="registerSignature()" disabled>
-        ✨ 生成簽章
-      </button>
-
-      <div class="error" id="errorMsg"></div>
-      <div class="success" id="successMsg"></div>
-
-      <div class="preview-section">
-        <img id="previewImg" class="preview-image" alt="預覽">
-      </div>
-
-      <div class="result-section" id="resultSection">
-        <h3>🎉 簽章已生成！</h3>
-        <p>這個零寬字符簽章已與圖片綁定：</p>
-        <div class="signature-display">
-          <span id="signatureCode" class="hidden-sig"></span>
-          <button class="copy-btn" onclick="copySignature()">複製</button>
+    <div class="links-section">
+      <a href="updatelog.html" class="link-card">
+        <div class="icon">📢</div>
+        <div class="text">
+          <div class="title" data-i18n="updatelog_title">更新日誌</div>
+          <div class="description" data-i18n="updatelog_desc">查看最新版本更新內容</div>
         </div>
-        <p style="color: #888; font-size: 0.9rem; margin-top: 15px;">
-          此簽章已自動儲存到 Gist，所有使用者都能同步取得。
-        </p>
-      </div>
-    </div>
+        <div class="arrow">→</div>
+      </a>
 
-    <div class="card" id="listSection">
-      <h2>📋 已註冊簽章列表</h2>
-      <div class="stats">
-        <div class="stat-item">
-          <div class="stat-value" id="totalSigs">0</div>
-          <div class="stat-label">已註冊簽章</div>
+      <a href="help.html" class="link-card">
+        <div class="icon">❓</div>
+        <div class="text">
+          <div class="title" data-i18n="help_title">使用說明</div>
+          <div class="description" data-i18n="help_desc">了解如何使用 GSS 貼圖系統</div>
         </div>
-      </div>
-      <div class="signature-list" id="sigList">
-        <p style="color: #888; text-align: center;">載入中...</p>
-      </div>
-      <button class="btn btn-secondary" onclick="loadSignatures()" style="margin-top: 15px; width: 100%;">
-        🔄 重新整理
-      </button>
+        <div class="arrow">→</div>
+      </a>
 
-      <div class="export-section">
-        <label>JSON 匯出 (供插件使用)</label>
-        <textarea id="jsonExport" readonly></textarea>
-        <button class="btn btn-secondary" onclick="copyJsonExport()" style="margin-top: 10px; width: 100%;">
-          📋 複製 JSON
-        </button>
-      </div>
+      <a href="https://chromewebstore.google.com/detail/general-sticker-system-gs/agngppbecmofipmmmjgafkojgggcembi" target="_blank" rel="noopener" class="link-card">
+        <div class="icon">🌐</div>
+        <div class="text">
+          <div class="title" data-i18n="chrome_title">Chrome 網上應用程式店</div>
+          <div class="description" data-i18n="chrome_desc">在 Chrome 瀏覽器中安裝 GSS</div>
+        </div>
+        <div class="arrow">→</div>
+      </a>
+
+      <a href="https://addons.mozilla.org/zh-CN/firefox/addon/general-sticker-system-gss/" target="_blank" rel="noopener" class="link-card">
+        <div class="icon">🦊</div>
+        <div class="text">
+          <div class="title" data-i18n="firefox_title">Firefox 附加元件</div>
+          <div class="description" data-i18n="firefox_desc">在 Firefox 瀏覽器中安裝 GSS</div>
+        </div>
+        <div class="arrow">→</div>
+      </a>
+
+      <a href="https://microsoftedge.microsoft.com/addons/detail/general-sticker-system-g/cooepcjakomllpddoiofpcfednangjgb" target="_blank" rel="noopener" class="link-card">
+        <div class="icon">🔷</div>
+        <div class="text">
+          <div class="title" data-i18n="edge_title">Microsoft Edge 附加元件</div>
+          <div class="description" data-i18n="edge_desc">在 Edge 瀏覽器中安裝 GSS</div>
+        </div>
+        <div class="arrow">→</div>
+      </a>
     </div>
 
-    <div class="gist-info">
-      <strong>💡 給插件使用者的資訊：</strong><br>
-      插件同步網址：<code>https://gist.githubusercontent.com/ElfinL/1d455ea28bec8b37797fee636188f189/raw/GSS-signatures.json</code><br>
-      <small style="color: #888;">將此網址貼到 GSS 插件的「遠端 JSON 網址」欄位即可同步簽章</small>
+    <div class="footer">
+      <div class="author" data-i18n="author">Made by Elfin</div>
+      <div>
+        <a href="https://github.com/ElfinL" target="_blank" rel="noopener">GitHub</a>
+      </div>
     </div>
   </div>
 
   <script>
-    // 零寬字符集
-    const ZERO_WIDTH_CHARS = ['\u200B', '\u200C', '\u200D', '\uFEFF'];
-    const SIG_PREFIX = '\u200B\u200C';
-
-    let currentSignature = '';
-    let currentImageUrl = '';
-    // 內建 Gist ID - 方案 A：所有人共用同一個簽章庫
-    let gistId = '1d455ea28bec8b37797fee636188f189';
-    let signatures = [];
-
-    // 設定
-    const WORKER_URL = 'https://small-wildflower-484d.elfin0wdwd.workers.dev';
-
-    // 初始化 - 方案 A：直接顯示註冊界面，無需設定
-    function init() {
-      // 直接顯示註冊界面
-      showRegisterSection();
-      // 更新插件資訊
-      document.getElementById('gistRawUrl').textContent = `https://gist.githubusercontent.com/ElfinL/${gistId}/raw/GSS-signatures.json`;
-      // 載入現有簽章
-      loadSignatures();
-    }
-
-    function saveGistConfig() {
-      gistId = document.getElementById('gistIdInput').value.trim();
-
-      if (!gistId) {
-        showError('請輸入 Gist ID');
-        return;
+    // 語言數據
+    const I18N_DATA = {
+      'zh-TW': {
+        subtitle: '通用貼圖系統',
+        updatelog_title: '更新日誌',
+        updatelog_desc: '查看最新版本更新內容',
+        help_title: '使用說明',
+        help_desc: '了解如何使用 GSS 貼圖系統',
+        chrome_title: 'Chrome 網上應用程式店',
+        chrome_desc: '在 Chrome 瀏覽器中安裝 GSS',
+        firefox_title: 'Firefox 附加元件',
+        firefox_desc: '在 Firefox 瀏覽器中安裝 GSS',
+        edge_title: 'Microsoft Edge 附加元件',
+        edge_desc: '在 Edge 瀏覽器中安裝 GSS',
+        author: 'Made by Elfin'
+      },
+      'zh-CN': {
+        subtitle: '通用贴图系统',
+        updatelog_title: '更新日志',
+        updatelog_desc: '查看最新版本更新内容',
+        help_title: '使用说明',
+        help_desc: '了解如何使用 GSS 贴图系统',
+        chrome_title: 'Chrome 网上应用店',
+        chrome_desc: '在 Chrome 浏览器中安装 GSS',
+        firefox_title: 'Firefox 附加组件',
+        firefox_desc: '在 Firefox 浏览器中安装 GSS',
+        edge_title: 'Microsoft Edge 附加组件',
+        edge_desc: '在 Edge 浏览器中安装 GSS',
+        author: 'Made by Elfin'
+      },
+      'en': {
+        subtitle: 'Universal Sticker System',
+        updatelog_title: 'Update Log',
+        updatelog_desc: 'View latest version updates',
+        help_title: 'Help',
+        help_desc: 'Learn how to use GSS sticker system',
+        chrome_title: 'Chrome Web Store',
+        chrome_desc: 'Install GSS on Chrome browser',
+        firefox_title: 'Firefox Add-ons',
+        firefox_desc: 'Install GSS on Firefox browser',
+        edge_title: 'Microsoft Edge Add-ons',
+        edge_desc: 'Install GSS on Edge browser',
+        author: 'Made by Elfin'
+      },
+      'ja': {
+        subtitle: 'ユニバーサルステッカーシステム',
+        updatelog_title: '更新ログ',
+        updatelog_desc: '最新バージョンの更新内容を確認',
+        help_title: 'ヘルプ',
+        help_desc: 'GSSステッカーシステムの使い方を学ぶ',
+        chrome_title: 'Chrome Web Store',
+        chrome_desc: 'ChromeブラウザにGSSをインストール',
+        firefox_title: 'Firefox アドオン',
+        firefox_desc: 'FirefoxブラウザにGSSをインストール',
+        edge_title: 'Microsoft Edge アドオン',
+        edge_desc: 'EdgeブラウザにGSSをインストール',
+        author: 'Made by Elfin'
+      },
+      'ko': {
+        subtitle: '유니버설 스티커 시스템',
+        updatelog_title: '업데이트 로그',
+        updatelog_desc: '최신 버전 업데이트 내용 확인',
+        help_title: '도움말',
+        help_desc: 'GSS 스티커 시스템 사용법 학습',
+        chrome_title: 'Chrome 웹 스토어',
+        chrome_desc: 'Chrome 브라우저에 GSS 설치',
+        firefox_title: 'Firefox 부가 기능',
+        firefox_desc: 'Firefox 브라우저에 GSS 설치',
+        edge_title: 'Microsoft Edge 부가 기능',
+        edge_desc: 'Edge 브라우저에 GSS 설치',
+        author: 'Made by Elfin'
       }
+    };
 
-      localStorage.setItem('gss_gist_id', gistId);
+    const SUPPORTED_LANGS = ['zh-TW', 'zh-CN', 'en', 'ja', 'ko'];
+    let currentLang = 'zh-TW';
 
-      document.getElementById('gistRawUrl').textContent = `https://gist.githubusercontent.com/[你的GitHub名稱]/${gistId}/raw/GSS-signatures.json`;
-      showSuccess('設定已儲存！');
-      showRegisterSection();
-      loadSignatures();
-    }
-
-    function showRegisterSection() {
-      document.getElementById('setupSection').style.display = 'none';
-      document.getElementById('registerSection').style.display = 'block';
-      document.getElementById('listSection').style.display = 'block';
-    }
-
-    // 顯示管理員設定面板
-    function showSetupPanel() {
-      document.getElementById('registerSection').style.display = 'none';
-      document.getElementById('listSection').style.display = 'none';
-      document.getElementById('setupSection').style.display = 'block';
-    }
-
-    // 隱藏管理員設定面板
-    function hideSetupPanel() {
-      document.getElementById('setupSection').style.display = 'none';
-      document.getElementById('registerSection').style.display = 'block';
-      document.getElementById('listSection').style.display = 'block';
-    }
-
-    // 重新設定
-    function resetConfig() {
-      localStorage.removeItem('gss_gist_id');
-      gistId = '';
-      signatures = [];
-      document.getElementById('gistIdInput').value = '';
-      document.getElementById('setupSection').style.display = 'block';
-      document.getElementById('registerSection').style.display = 'none';
-      document.getElementById('listSection').style.display = 'none';
-      showSuccess('已重置，請重新輸入設定');
-    }
-
-    // 生成唯一簽章
-    function generateSignature(id) {
-      let encoded = '';
-      let num = id;
-      for (let i = 0; i < 4; i++) {
-        encoded = ZERO_WIDTH_CHARS[num % 4] + encoded;
-        num = Math.floor(num / 4);
-      }
-      return SIG_PREFIX + encoded;
-    }
-
-    // 驗證 Discord URL
-    function isValidDiscordUrl(url) {
-      return url.startsWith('https://cdn.discordapp.com/attachments/');
-    }
-
-    // 預覽圖片
-    async function previewImage() {
-      const url = document.getElementById('imageUrl').value.trim();
-      const errorMsg = document.getElementById('errorMsg');
-      const previewImg = document.getElementById('previewImg');
-      const registerBtn = document.getElementById('registerBtn');
-
-      errorMsg.classList.remove('show');
-
-      if (!url) {
-        showError('請輸入圖片網址');
-        return;
-      }
-
-      if (!isValidDiscordUrl(url)) {
-        showError('只接受 Discord CDN 網址');
-        return;
-      }
-
-      previewImg.style.display = 'none';
-      previewImg.src = url;
-
-      previewImg.onload = function () {
-        previewImg.classList.add('show');
-        registerBtn.disabled = false;
-        currentImageUrl = url;
-      };
-
-      previewImg.onerror = function () {
-        showError('圖片載入失敗');
-        registerBtn.disabled = true;
-      };
-    }
-
-    // 註冊簽章
-    async function registerSignature() {
-      const url = document.getElementById('imageUrl').value.trim();
-      const errorMsg = document.getElementById('errorMsg');
-      const successMsg = document.getElementById('successMsg');
-      const resultSection = document.getElementById('resultSection');
-      const registerBtn = document.getElementById('registerBtn');
-
-      errorMsg.classList.remove('show');
-      successMsg.classList.remove('show');
-      registerBtn.disabled = true;
-      registerBtn.textContent = '處理中...';
-
-      try {
-        // 先載入現有簽章
-        await loadSignatures();
-
-        // 檢查是否已存在
-        const existing = signatures.find(s => s.url === url);
-        if (existing) {
-          currentSignature = existing.keyword;
-          showSuccess('此圖片已註冊過');
-        } else {
-          // 生成新簽章
-          const newId = signatures.length + 1;
-          currentSignature = generateSignature(newId);
-          signatures.push({
-            keyword: currentSignature,
-            url: url
-          });
-          showSuccess('新簽章已生成！');
-        }
-
-        // 顯示結果
-        document.getElementById('signatureCode').textContent = currentSignature;
-        resultSection.classList.add('show');
-
-        // 更新 Gist
-        await updateGist();
-
-        // 重新整理列表
-        await loadSignatures();
-
-      } catch (err) {
-        showError(err.message);
-      } finally {
-        registerBtn.disabled = false;
-        registerBtn.textContent = '✨ 生成簽章';
-      }
-    }
-
-    // 從 Gist 載入簽章
-    async function loadSignatures() {
-      console.log('[GSS] 開始載入簽章, gistId:', gistId);
-
-      if (!gistId) {
-        console.error('[GSS] 錯誤: gistId 為空');
-        showError('Gist ID 未設定');
-        return;
-      }
-
-      const listEl = document.getElementById('sigList');
-      listEl.innerHTML = '<p style="color: #888; text-align: center;">載入中...</p>';
-
-      try {
-        const response = await fetch(`https://api.github.com/gists/${gistId}`);
-        console.log('[GSS] GitHub API 回應:', response.status);
-
-        if (!response.ok) {
-          throw new Error(`GitHub API 錯誤: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        if (data.files && data.files['GSS-signatures.json']) {
-          const content = data.files['GSS-signatures.json'].content;
-          signatures = JSON.parse(content);
-          console.log('[GSS] 載入成功, 簽章數量:', signatures.length);
-        } else {
-          console.warn('[GSS] Gist 中沒有 GSS-signatures.json 檔案');
-          signatures = [];
-        }
-
-        renderSignatureList();
-        updateStats();
-        updateJsonExport();
-
-      } catch (err) {
-        console.error('[GSS] 載入失敗:', err);
-        signatures = [];
-        listEl.innerHTML = `<p style="color: #ff6b6b; text-align: center;">❌ 載入失敗: ${err.message}</p>`;
-        showError('無法載入簽章列表: ' + err.message);
-      }
-    }
-
-    // 更新 Gist（使用 Cloudflare Workers）
-    async function updateGist() {
-      if (!gistId) {
-        throw new Error('請先設定 Gist ID');
-      }
-
-      // 取得最後一個簽章（剛剛新增的）
-      const lastSignature = signatures[signatures.length - 1];
-
-      const response = await fetch(WORKER_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          imageUrl: lastSignature.url,
-          keyword: lastSignature.keyword,
-          gistId: gistId
-        })
+    // 切換語言
+    function switchLanguage(lang) {
+      if (!SUPPORTED_LANGS.includes(lang)) return;
+      
+      currentLang = lang;
+      
+      // 更新按鈕狀態
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || '註冊失敗');
-      }
-
-      return data;
-    }
-
-    // 渲染簽章列表
-    function renderSignatureList() {
-      const listEl = document.getElementById('sigList');
-
-      if (signatures.length === 0) {
-        listEl.innerHTML = '<p style="color: #888; text-align: center;">暫無註冊的簽章</p>';
-        return;
-      }
-
-      listEl.innerHTML = signatures.map((item, idx) => `
-        <div class="sig-item">
-          <img src="${item.url}" alt="簽章圖片" 
-               onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 50 50%22><text y=%2235%22 font-size=%2230%22>🖼️</text></svg>'">
-          <div class="sig-info">
-            <div style="color: #00ff88; font-size: 0.9rem;">簽章 #${idx + 1}</div>
-            <div class="sig-code">${item.keyword.substring(0, 4)}...${item.keyword.slice(-4)}</div>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function updateStats() {
-      document.getElementById('totalSigs').textContent = signatures.length;
-    }
-
-    function updateJsonExport() {
-      document.getElementById('jsonExport').value = JSON.stringify(signatures, null, 2);
-    }
-
-    // 複製功能
-    function copySignature() {
-      navigator.clipboard.writeText(currentSignature).then(() => {
-        const btn = document.querySelector('.copy-btn');
-        const originalText = btn.textContent;
-        btn.textContent = '已複製！';
-        setTimeout(() => btn.textContent = originalText, 1500);
-      });
-    }
-
-    function copyJsonExport() {
-      const textarea = document.getElementById('jsonExport');
-      textarea.select();
-      document.execCommand('copy');
-      showSuccess('JSON 已複製到剪貼簿！');
-    }
-
-    // 顯示訊息
-    function showError(msg) {
-      const el = document.getElementById('errorMsg');
-      el.textContent = '❌ ' + msg;
-      el.classList.add('show');
-      setTimeout(() => el.classList.remove('show'), 5000);
-    }
-
-    function showSuccess(msg) {
-      const el = document.getElementById('successMsg');
-      el.textContent = '✅ ' + msg;
-      el.classList.add('show');
-      setTimeout(() => el.classList.remove('show'), 5000);
-    }
-
-    // 測試連線 - 直接測試 GitHub API
-    async function testConnection() {
-      const debugDiv = document.getElementById('debugInfo');
-      debugDiv.style.display = 'block';
-      const gid = document.getElementById('gistIdInput').value.trim() || gistId;
-
-      if (!gid) {
-        debugDiv.innerHTML = '<span style="color: #ff6b6b;">❌ 請先輸入 Gist ID</span>';
-        return;
-      }
-
-      debugDiv.innerHTML = '⏳ 測試中...';
-
-      try {
-        // 測試直接讀取 Gist（不需要 Token）
-        const response = await fetch(`https://api.github.com/gists/${gid}`);
-        const status = response.status;
-
-        if (response.ok) {
-          const data = await response.json();
-          const hasFile = data.files && data.files['GSS-signatures.json'];
-          debugDiv.innerHTML = `
-            <span style="color: #51cf66;">✅ GitHub API 連線成功</span><br>
-            狀態碼: ${status}<br>
-            Gist ID: ${gid}<br>
-            檔案存在: ${hasFile ? '✅ GSS-signatures.json' : '❌ 找不到 GSS-signatures.json'}
-          `;
-        } else {
-          debugDiv.innerHTML = `
-            <span style="color: #ff6b6b;">❌ GitHub API 錯誤</span><br>
-            狀態碼: ${status}<br>
-            回應: ${await response.text()}
-          `;
+      
+      // 更新內容
+      const data = I18N_DATA[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (data[key]) {
+          el.textContent = data[key];
         }
-      } catch (err) {
-        debugDiv.innerHTML = `
-          <span style="color: #ff6b6b;">❌ 連線失敗</span><br>
-          錯誤: ${err.message}
-        `;
-      }
-    }
-
-    // 測試 Worker 連線
-    async function testWorker() {
-      const debugDiv = document.getElementById('debugInfo');
-      debugDiv.style.display = 'block';
-      const gid = document.getElementById('gistIdInput').value.trim() || gistId;
-
-      if (!gid) {
-        debugDiv.innerHTML = '<span style="color: #ff6b6b;">❌ 請先輸入 Gist ID</span>';
-        return;
-      }
-
-      debugDiv.innerHTML = '⏳ 測試 Worker...';
-
+      });
+      
+      // 保存到 localStorage
       try {
-        const response = await fetch(WORKER_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            imageUrl: 'https://cdn.discordapp.com/attachments/test.png',
-            keyword: 'test',
-            gistId: gid
-          })
-        });
-
-        const data = await response.json();
-        debugDiv.innerHTML = `
-          <span style="color: ${response.ok ? '#51cf66' : '#ff6b6b'};">${response.ok ? '✅' : '❌'} Worker 回應</span><br>
-          狀態碼: ${response.status}<br>
-          回應: ${JSON.stringify(data, null, 2)}
-        `;
-      } catch (err) {
-        debugDiv.innerHTML = `
-          <span style="color: #ff6b6b;">❌ Worker 連線失敗</span><br>
-          Worker URL: ${WORKER_URL}<br>
-          錯誤: ${err.message}<br>
-          <small>可能原因: Worker 未部署、URL 錯誤、或被瀏覽器攔截</small>
-        `;
+        localStorage.setItem('indexLang', lang);
+      } catch (e) {
+        // localStorage not available
       }
     }
 
     // 初始化
-    document.addEventListener('DOMContentLoaded', init);
+    function init() {
+      // 從 localStorage 或 URL 參數獲取語言
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlLang = urlParams.get('lang');
+      
+      if (urlLang && SUPPORTED_LANGS.includes(urlLang)) {
+        currentLang = urlLang;
+      } else {
+        try {
+          const stored = localStorage.getItem('indexLang');
+          if (stored && SUPPORTED_LANGS.includes(stored)) {
+            currentLang = stored;
+          }
+        } catch (e) {
+          // localStorage not available
+        }
+      }
+
+      // 設置語言按鈕狀態
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
+      });
+
+      // 綁定事件
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          switchLanguage(btn.dataset.lang);
+        });
+      });
+
+      // 初始渲染
+      switchLanguage(currentLang);
+    }
+
+    // DOM 加載完成後初始化
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
   </script>
 </body>
 
