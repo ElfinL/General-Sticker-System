@@ -27,15 +27,15 @@
 
     .header {
       text-align: center;
-      padding: 50px 0;
+      padding: 30px 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
 
     .header h1 {
       font-size: 32px;
       font-weight: 600;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -45,13 +45,14 @@
     .header .subtitle {
       font-size: 16px;
       color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 8px;
     }
 
     .lang-switch {
       display: flex;
       justify-content: center;
       gap: 12px;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     .lang-btn {
@@ -126,6 +127,17 @@
       color: rgba(255, 255, 255, 0.3);
     }
 
+    .platforms-list {
+      text-align: center;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 16px;
+    }
+
+    .platforms-list span {
+      margin: 0 4px;
+    }
+
     .footer {
       text-align: center;
       padding: 40px 0;
@@ -156,6 +168,16 @@
     <div class="header">
       <h1><img src="https://elfinl.github.io/General-Sticker-System/icons/icon48.png" alt="GSS Logo"> General Sticker System (GSS)</h1>
       <div class="subtitle" data-i18n="subtitle">通用貼圖系統</div>
+      <div class="platforms-list">
+        <span data-i18n="platforms_prefix">支援平台：</span>
+        <span data-i18n="platform_twitch">Twitch</span> •
+        <span data-i18n="platform_youtube">YouTube</span> •
+        <span data-i18n="platform_kick">Kick</span> •
+        <span data-i18n="platform_vaughn">Vaughn Live</span> •
+        <span data-i18n="platform_beamstream">Beamstream</span> •
+        <span data-i18n="platform_wtv">W.TV</span>
+        <span data-i18n="platforms_suffix">（可自定義）</span>
+      </div>
     </div>
 
     <div class="lang-switch">
@@ -236,6 +258,14 @@
         firefox_desc: '在 Firefox 瀏覽器中安裝 GSS',
         edge_title: 'Microsoft Edge 附加元件',
         edge_desc: '在 Edge 瀏覽器中安裝 GSS',
+        platforms_prefix: '支援平台：',
+        platform_twitch: 'Twitch',
+        platform_youtube: 'YouTube',
+        platform_kick: 'Kick',
+        platform_vaughn: 'Vaughn Live',
+        platform_beamstream: 'Beamstream',
+        platform_wtv: 'W.TV',
+        platforms_suffix: '（可自定義）',
         author: 'Made by Elfin'
       },
       'zh-CN': {
@@ -250,6 +280,14 @@
         firefox_desc: '在 Firefox 浏览器中安装 GSS',
         edge_title: 'Microsoft Edge 附加组件',
         edge_desc: '在 Edge 浏览器中安装 GSS',
+        platforms_prefix: '支持平台：',
+        platform_twitch: 'Twitch',
+        platform_youtube: 'YouTube',
+        platform_kick: 'Kick',
+        platform_vaughn: 'Vaughn Live',
+        platform_beamstream: 'Beamstream',
+        platform_wtv: 'W.TV',
+        platforms_suffix: '（可自定义）',
         author: 'Made by Elfin'
       },
       'en': {
@@ -264,6 +302,14 @@
         firefox_desc: 'Install GSS on Firefox browser',
         edge_title: 'Microsoft Edge Add-ons',
         edge_desc: 'Install GSS on Edge browser',
+        platforms_prefix: 'Supported: ',
+        platform_twitch: 'Twitch',
+        platform_youtube: 'YouTube',
+        platform_kick: 'Kick',
+        platform_vaughn: 'Vaughn Live',
+        platform_beamstream: 'Beamstream',
+        platform_wtv: 'W.TV',
+        platforms_suffix: ' (customizable)',
         author: 'Made by Elfin'
       },
       'ja': {
@@ -278,6 +324,14 @@
         firefox_desc: 'FirefoxブラウザにGSSをインストール',
         edge_title: 'Microsoft Edge アドオン',
         edge_desc: 'EdgeブラウザにGSSをインストール',
+        platforms_prefix: '対応プラットフォーム：',
+        platform_twitch: 'Twitch',
+        platform_youtube: 'YouTube',
+        platform_kick: 'Kick',
+        platform_vaughn: 'Vaughn Live',
+        platform_beamstream: 'Beamstream',
+        platform_wtv: 'W.TV',
+        platforms_suffix: '（カスタマイズ可能）',
         author: 'Made by Elfin'
       },
       'ko': {
@@ -292,6 +346,14 @@
         firefox_desc: 'Firefox 브라우저에 GSS 설치',
         edge_title: 'Microsoft Edge 부가 기능',
         edge_desc: 'Edge 브라우저에 GSS 설치',
+        platforms_prefix: '지원 플랫폼：',
+        platform_twitch: 'Twitch',
+        platform_youtube: 'YouTube',
+        platform_kick: 'Kick',
+        platform_vaughn: 'Vaughn Live',
+        platform_beamstream: 'Beamstream',
+        platform_wtv: 'W.TV',
+        platforms_suffix: '（사용자 정의 가능）',
         author: 'Made by Elfin'
       }
     };
